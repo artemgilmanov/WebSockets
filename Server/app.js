@@ -29,15 +29,15 @@ websocket.on('request', (req) => {
   }
 
   let connection = req.accept();
-  connection.send('Connection established :)');
+  connection.send('Connection established');
   console.log('Connection established and accepted');
 
   connection.on('message', (message) => {
     connection.send(`Ping. Message recieved from client: ${message.utf8Data}`);
   });
 
-  connection.on('close', (code, description) => {
+  connection.on('close', (code, reason) => {
     console.log(`Peer connection ${connection.remoteAdress} disconnected. 
-        The reason is: ${description} and the closure code is: ${code}`);
+        The reason is: ${reason} and the closure code is: ${code}`);
   });
 });
