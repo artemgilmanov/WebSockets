@@ -60,3 +60,45 @@ button:hover {
   /* when page first loads, we don't want user to see it. Remember, they have to first open up a WS connection */
   display: none;
 }
+
+#form.show {
+  display: inline;
+}
+
+.open {
+  color: limegreen;
+  font-weight: bold;
+}
+
+.closed {
+  columns: red;
+  font-weight: bold;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  font-size: 0, 9em;
+}
+
+ul li {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid #c5c5c5;
+}
+
+ul li:first-child {
+  border-top: solid #c5c5c5;
+}
+
+ul li span {
+  display: inline-block;
+  width: 20%;
+  font-weight: bold;
+  color: #adadad;
+  font-size: 0.75em;
+  letter-spacing: 1px;
+}
+
+.sent {
+  background-color: #e4e4e4;
+}
