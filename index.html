@@ -40,6 +40,61 @@
         let url = 'ws://localhost:8080';
         let socket = new WebSocket(url);
         console.log(socket);
+
+        socket.onopen = (openEvent) => {
+          console.log(`SOCKET CONNECTING STATUS IS: ${socket.readyState}`);
+          socketStatus.innerHTML = `Connected to ${openEvent.currentTarget.url}`;
+          socketStatus.className = 'open';
+          form.className = 'show';
+        };
+
+        socket.onmessage = (message) => {
+          console.log(`SOCKET CONNECTING STATUS IS: ${socket.readyState}`);
+          let messageData = message.data;
+          table.innerHTML +=
+            '<li><spane>Recieved: </span>' + messageData + '</li>';
+        };
+
+        socket.onclose = (closeEvent) => {
+          console.log(`SOCKET CONNECTING STATUS IS: ${socket.readyState}`);
+          table.innerHTML +=
+            `<li class="receieved, closed"><span>CLOSED:</span>` +
+            'CLOSED' +
+            `</li>`;
+          socketStatus.innerHTML = 'Disconnected from WebSockets.';
+          socketStatus.className = 'closed';
+        };
+
+        socket.onerror = (errorEvent) => {
+          console.log(`SOCKET CONNECTING STATUS IS: ${socket.readyState}`);
+          socketStatus.innerHTML = 'Error.';
+          socketStatus.className = 'closed';
+        };
+
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          if (socket.readyState === 1) {
+            let user_text = message.value;
+            socket.send(user_text);
+
+            table.innerHTML +=
+              `<li class="sent"><span>SENT:</span>` + user_text + `</li>`;
+            message.value = '';
+          }
+        });
+
+        close_ws_btn.addEventListener('click', () => {
+          socket.close();
+          console.log(`SOCKET CONNECTING STATUS IS: ${socket.readyState}`);
+
+          form.className = '';
+
+          open_ws_btn.disabled = false;
+          open_ws_btn.style.background = '';
+          open_ws_btn.style.pointerEvents = '';
+          open_ws_btn.textContent = 'Open WS';
+        });
       });
     </script>
   </body>
