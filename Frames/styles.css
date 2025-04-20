@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+  }
+  
+  h1 span:nth-child(2),
+  h1 span:nth-child(5) {
+    display: inline-block;
+    animation: wiggle 7s ease-in-out infinite;
+  }
+  
+  @keyframes wiggle {
+    0% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(20deg);
+    }
+    100% {
+      transform: rotate(-10deg);
+    }
+  }
+
+  .buttons-container {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  button {
+    width: 20%;
+    margin-right: 0.5rem;
+    margin-top: 1em;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .response {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #666;
+  }
+  
+  .response::before {
+    content: "🔮 ";
+  }
+  
+  .response::after {
+    content: " 🔮";
+  }
