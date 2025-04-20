@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frames</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1><span>F</span><span>R</span><span>A</span><span>M</span><span>E</span><span>S</span></h1>
+  <div class="buttons-container">
+    <button id="get-button">GET Request (HTTP)</button>
+    <span id="get-response" class="response"></span>
+    <br>
+    <button id="ws-button">WS Request</button>
+    <span id="ws-response" class="response"></span>
+  </div>
+  <script>
+    // GET Request
+    const getButton = document.getElementById('get-button');
+    const getResponse = document.getElementById('get-response');
+
+    getButton.addEventListener('click', async () => {
+        try {
+            // use the Fetch API with the new "await" syntax
+            const response = await fetch('http://localhost:8080/hello');
+            const data = await response.text(); // use .text() to deal with the readablestream body
+            getResponse.textContent = data; // inserting the data into our <span> tag
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+
+    // WS Connection
+    const wsButton = document.getElementById('ws-button');
+    const wsResponse = document.getElementById('ws-response');
+
+    wsButton.addEventListener('click', () => {
+        // use the WebSocket API to open up a WS connection
+        const socket = new WebSocket('ws://localhost:8080');
+
+        // listen for the onopen event
+        socket.addEventListener('open', () => {
+            console.log('WebSocket connection established');
+        });
+        // listen for message event and display data from server in our <span> tag
+        socket.addEventListener('message', (event) => {
+            // remember, the onmessage event emitter will give you a MessageEvent object
+            wsResponse.textContent = event.data;
+        });
+        // listen for the onclose event
+        socket.addEventListener('close', () => {
+            console.log('WebSocket connection closed');
+        });
+    });
+
+  </script>
+</body>
+</html>
